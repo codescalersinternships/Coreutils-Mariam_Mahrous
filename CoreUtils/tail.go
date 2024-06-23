@@ -19,6 +19,11 @@ func main() {
 	if len(arg)==4 && arg[2]=="-n"{
 		n, err =strconv.Atoi(arg[3])
 		check(err)
+		if arg[3]<"0" {
+			n=0;
+			fmt.Println("Try again using a valid postive number")
+			os.Exit(0)
+		}
 	}
 	check(err)
 	spaces:=0
