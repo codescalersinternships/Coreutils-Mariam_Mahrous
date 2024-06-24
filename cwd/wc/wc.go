@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	s "strings"
 )
 
 func check(e error) {
@@ -12,15 +12,19 @@ func check(e error) {
 		os.Exit(1)
 	}
 }
-//didn't use boolvar 34an msh 3rfa a3ml el -wl / -lw -wlc w keda w aked msh ha7ot ll kol combination flag 
 
 func main() {
 	arg := os.Args
-	var req = ""
-	if len(arg) == 3 {
-		req = arg[2]
+	var showLines, showWords, showChars bool
+	flag.BoolVar(&showLines, "l", false, "Show Lines")
+	flag.BoolVar(&showWords, "w", false, "Show Words")
+	flag.BoolVar(&showChars, "c", false, "Show Chars")
+	flag.Parse()
+	var req = arg[1]
+	if len(arg) > 1 {
+		req = arg[len(arg)-1]
 	}
-	dat, err := os.ReadFile(arg[1])
+	dat, err := os.ReadFile(req)
 	check(err)
 	var line, word, char int = 0, 0, len(string(dat))
 	var lastchar byte = 32
@@ -32,17 +36,17 @@ func main() {
 		}
 		lastchar = dat[i]
 	}
-	if s.Contains(req, "l") {
+	if showLines {
 		fmt.Printf("%d ", line)
 	}
-	if s.Contains(req, "w") {
+	if showWords {
 		fmt.Printf("%d ", word)
 	}
-	if s.Contains(req, "c") {
+	if showChars {
 		fmt.Printf("%d ", char)
 	}
 	if len(arg) == 2 {
 		fmt.Printf("%d %d %d ", line, word, char)
 	}
-	fmt.Printf("%s \n", arg[1])
+	fmt.Printf("%s \n", req)
 }
