@@ -9,7 +9,7 @@ import (
 func main() {
 	arg := os.Args
 	var showLines bool
-	flag.BoolVar(&showLines, "n", false, "Show Lines")
+	flag.BoolVar(&showLines, "n", false, "New line")
 	flag.Parse()
 	if showLines {
 		fmt.Print(arg[2])

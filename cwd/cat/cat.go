@@ -23,7 +23,7 @@ func printLineNumber(i int, showLines bool) {
 func main() {
 	arg := os.Args
 	var showLines bool
-	flag.BoolVar(&showLines, "n", false, "Show Lines")
+	flag.BoolVar(&showLines, "n", false, "Show Lines Numbers")
 	flag.Parse()
 	dat, err := os.ReadFile(arg[1])
 	if showLines {
