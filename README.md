@@ -7,12 +7,12 @@ To run each command, you can use `go run` followed by the Go file name and any a
  1. Head :
     Print the first 10 lines of input by default. Use the `-n` flag to specify a different number of lines to print.
     ```sh
-    go run head.go [filename] -n [number]
+    go run head.go  -n [number] [filename]
     ```
  2. Tail :
     Print the last 10 lines of input by default. Use the `-n` flag to specify a different number of lines to print.
     ```sh
-    go run tail.go [filename] -n [number]
+    go run tail.go -n [number] [filename]
     ```
  3. Echo :
     Print arguments to standard output. use -n to omit the trailing newline.
@@ -28,7 +28,7 @@ To run each command, you can use `go run` followed by the Go file name and any a
     Count lines, words, and characters in the input.
     Add -l, -w, and -c flags to display only lines, words, or characters respectively.
     ```sh
-    go run wc.go [filename] -wlc
+    go run wc.go -w -l [filename]
     ```
  6. true :
     A command that does nothing successfully.
@@ -52,4 +52,12 @@ To run each command, you can use `go run` followed by the Go file name and any a
     ```sh
     go run env.go
     ```
- 
+
+10. yes :
+By default, without any arguments, it outputs 'y' indefinitely until stopped. To stop the command, you can simply use the Ctrl + C combination. If you want to print a different string, you can provide it as
+an argument to the yes command.
+     ```sh
+    go run yes.go hello
+    ```
+     
+   
