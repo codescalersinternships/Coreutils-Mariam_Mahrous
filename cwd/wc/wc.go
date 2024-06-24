@@ -8,9 +8,11 @@ import (
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		fmt.Printf("Can't Read file %s\n", e)
+		os.Exit(1)
 	}
 }
+//didn't use boolvar 34an msh 3rfa a3ml el -wl / -lw -wlc w keda w aked msh ha7ot ll kol combination flag 
 
 func main() {
 	arg := os.Args

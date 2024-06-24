@@ -1,12 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/fs"
+	"log"
 	"math"
 	"os"
 	"path/filepath"
-	"strconv"
 	s "strings"
 )
 
@@ -14,7 +15,8 @@ var a int = math.MaxInt
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Fatal(e)
+		os.Exit(1)
 	}
 }
 
@@ -23,24 +25,32 @@ func visit(path string, d fs.DirEntry, err error) error {
 		return err
 	}
 	if len(s.Split(path, "/")) <= a && path != "./" {
+		printLength(len(s.Split(path, "/")))
 		fmt.Println(" ", path)
 	}
 	return nil
 
 }
 
-func main() {
-	arg := os.Args
-	if len(arg) == 3 && arg[1] == "-l" {
-		var err error
-		a, err = strconv.Atoi(arg[2])
-		check(err)
+func printLength(depth int) {
+	for range depth - 1 {
+		fmt.Print(" ")
 	}
-	if arg[2] < "0" {
-		a = 0
+	fmt.Print("|__")
+}
+
+func numberCheck(n int) {
+	if n < 0 {
+		n = 0
 		fmt.Println("Try again using a valid postive number")
-		os.Exit(0)
+		os.Exit(1)
 	}
+}
+
+func main() {
+	flag.IntVar(&a, "l", math.MaxInt, "Depth of Directories")
+	flag.Parse()
+	numberCheck(a)
 	err := filepath.WalkDir("./", visit)
 	check(err)
 }
