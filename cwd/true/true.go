@@ -1,9 +1,9 @@
-package main 
-	
+package main
+
 import (
-    "os"
+	"os"
 )
 
-func main()  {
-	os.Exit(0) 
+func main() {
+	os.Exit(0)
 }

@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"fmt"
@@ -6,23 +6,23 @@ import (
 )
 
 func check(e error) {
-	if e!=nil{
+	if e != nil {
 		panic(e)
 	}
 }
 
 func main() {
 	arg := os.Args
-	dat,err :=os.ReadFile(arg[1])
+	dat, err := os.ReadFile(arg[1])
 	check(err)
-	line:=1
-	fmt.Printf("%d ",line)
-	for i:=0 ; i<len(string(dat)) ; i++{
+	line := 1
+	fmt.Printf("%d ", line)
+	for i := 0; i < len(string(dat)); i++ {
 		fmt.Print(string(dat[i]))
-		if dat[i]==10 {
+		if dat[i] == 10 {
 			line++
-			fmt.Printf("%d ",line)
-		} 
+			fmt.Printf("%d ", line)
+		}
 	}
 	fmt.Printf(" \n")
 }
