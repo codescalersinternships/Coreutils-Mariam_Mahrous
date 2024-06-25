@@ -1,6 +1,6 @@
 # Coreutils-Mariam_Mahrous
 
- This repo covers 9 basic linux commands implemented using Go 
+ This repo covers 10 basic linux commands implemented using Go 
 
 To run each command, you can use `go run` followed by the Go file name and any arguments required by the command. Here’s how you can run each one:
 
