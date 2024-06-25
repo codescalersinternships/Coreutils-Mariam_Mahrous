@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	s "strings"
+	"strings"
 )
 
 func check(e error) {
@@ -21,9 +21,9 @@ func main() {
 	flag.BoolVar(&showWords, "w", false, "Show Words")
 	flag.BoolVar(&showChars, "c", false, "Show Chars")
 	flag.Parse()
-	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
+	dat, err := os.ReadFile(strings.Join(flag.Args(), " "))
 	check(err)
-	var line, word, char int = len(s.Split(string(dat), "\n")), 0, len(string(dat))
+	var line, word, char int = len(strings.Split(string(dat), "\n")), 0, len(string(dat))
 	var lastchar = ' '
 	runes := []rune(string(dat))
 	for _, grapheme := range runes {
@@ -44,5 +44,5 @@ func main() {
 	if len(arg) == 2 {
 		fmt.Printf("%d %d %d ", line, word, char)
 	}
-	fmt.Printf("%s \n", s.Join(flag.Args(), " "))
+	fmt.Printf("%s \n", strings.Join(flag.Args(), " "))
 }

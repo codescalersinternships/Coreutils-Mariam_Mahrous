@@ -8,7 +8,7 @@ import (
 	"math"
 	"os"
 	"path/filepath"
-	s "strings"
+	"strings"
 )
 
 var a int = math.MaxInt
@@ -24,9 +24,10 @@ func visit(path string, d fs.DirEntry, err error) error {
 	if err != nil {
 		return err
 	}
-	if len(s.Split(path, "/")) <= a && path != "./" {
-		printLength(len(s.Split(path, "/")))
-		fmt.Println(" ", path)
+	if len(strings.Split(path, "/")) <= a && path != "./" {
+		pathSplited := strings.Split(path, "/")
+		printLength(len(pathSplited))
+		fmt.Println(" ", pathSplited[len(pathSplited) -1])
 	}
 	return nil
 
@@ -34,7 +35,7 @@ func visit(path string, d fs.DirEntry, err error) error {
 
 func printLength(depth int) {
 	for range depth - 1 {
-		fmt.Print(" ")
+		fmt.Print("  ")
 	}
 	fmt.Print("|__")
 }

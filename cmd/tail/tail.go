@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	s "strings"
+	"strings"
 )
 
 func check(e error) {
@@ -25,9 +25,9 @@ func main() {
 	flag.IntVar(&n, "n", 10, "No of lines displayed")
 	flag.Parse()
 	numberCheck(n)
-	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
+	dat, err := os.ReadFile(strings.Join(flag.Args(), " "))
 	check(err)
-	lines:= s.Split(string(dat), "\n")
+	lines:= strings.Split(string(dat), "\n")
 	j := len(lines) - n
 	if len(lines)-n < 0 {
 		j = 0
