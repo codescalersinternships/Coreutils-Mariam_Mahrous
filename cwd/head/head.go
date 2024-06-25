@@ -1,46 +1,36 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
+	s "strings"
 )
 
 func check(e error) {
 	if e != nil {
-		fmt.Printf("Can't Read file %s\n", e)
-		os.Exit(1)
+		log.Fatalf("Can't Read file %s\n", e)
 	}
 }
 
 func numberCheck(n int) {
 	if n < 0 {
-		n = 0
-		fmt.Println("Try again using a valid postive number")
-		os.Exit(1)
+		log.Fatalf("Try again using a valid postive number \n")
 	}
 }
 
 func main() {
-	arg := os.Args
 	var n int
 	flag.IntVar(&n, "n", 10, "No of lines displayed")
 	flag.Parse()
 	numberCheck(n)
-	dat, err := os.ReadFile(arg[1])
-	if len(arg) == 4 && n != 10 {
-		dat, err = os.ReadFile(arg[3])
-	}
+	file, err := os.Open(s.Join(flag.Args(), " "))
 	check(err)
-	var i, spaces int = 0, 0
-	for {
-		fmt.Print(string(dat[i]))
-		if dat[i] == 10 {
-			spaces++
-		}
-		i++
-		if spaces == n || i == len(string(dat)) {
-			break
-		}
+	scanner := bufio.NewScanner(file)
+	for i := 0; scanner.Scan() && i < n; i++ {
+		fmt.Println(scanner.Text())
 	}
+	file.Close()
 }

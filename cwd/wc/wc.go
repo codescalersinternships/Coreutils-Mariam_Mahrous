@@ -27,14 +27,15 @@ func main() {
 	dat, err := os.ReadFile(req)
 	check(err)
 	var line, word, char int = 0, 0, len(string(dat))
-	var lastchar byte = 32
-	for i := 0; i < len(string(dat)); i++ {
-		if dat[i] == 10 {
+	var lastchar = ' '
+	runes := []rune(string(dat))
+	for i := 0; i < len(string(runes)); i++ {
+		if runes[i] == '\n' {
 			line++
-		} else if dat[i] != 32 && dat[i] != 10 && (lastchar == 32 || lastchar == 10) {
+		} else if runes[i] != ' ' && runes[i] != '\n' && (lastchar == ' ' || lastchar == '\n') {
 			word++
 		}
-		lastchar = dat[i]
+		lastchar = runes[i]
 	}
 	if showLines {
 		fmt.Printf("%d ", line)

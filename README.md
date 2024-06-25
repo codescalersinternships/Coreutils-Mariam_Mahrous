@@ -4,22 +4,22 @@
 
 To run each command, you can use `go run` followed by the Go file name and any arguments required by the command. Here’s how you can run each one:
 
- 1. Head :
+ 1. head :
     Print the first 10 lines of input by default. Use the `-n` flag to specify a different number of lines to print.
     ```sh
     go run head.go  -n [number] [filename]
     ```
- 2. Tail :
+ 2. tail :
     Print the last 10 lines of input by default. Use the `-n` flag to specify a different number of lines to print.
     ```sh
     go run tail.go -n [number] [filename]
     ```
- 3. Echo :
+ 3. echo :
     Print arguments to standard output. use -n to omit the trailing newline.
     ```sh
     go run echo.go -n [text]
     ```
- 4. Cat :
+ 4. cat :
     print files. Use -n to output lines numbers.
     ```sh
     go run cat.go -n [filename]

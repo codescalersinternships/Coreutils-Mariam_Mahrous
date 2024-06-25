@@ -3,18 +3,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
+	s "strings"
 )
 
 func main() {
-	arg := os.Args
 	var showLines bool
-	flag.BoolVar(&showLines, "n", false, "New line")
+	flag.BoolVar(&showLines, "n", false, "Omit new line")
 	flag.Parse()
+	args := s.Join(flag.Args(), " ")
 	if showLines {
-		fmt.Print(arg[2])
+		fmt.Print(args)
 	} else {
-		fmt.Println(arg[1])
+		fmt.Println(args)
 	}
 
 }
