@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	s "strings"
 )
 
 func check(e error) {
@@ -24,14 +25,10 @@ func incrementLines(showLines bool) func() {
 }
 
 func main() {
-	args := os.Args
 	var showLines bool
 	flag.BoolVar(&showLines, "n", false, "Show Lines Numbers")
 	flag.Parse()
-	dat, err := os.ReadFile(args[1])
-	if showLines {
-		dat, err = os.ReadFile(args[2])
-	}
+	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
 	check(err)
 	nextInt := incrementLines(showLines)
 	nextInt()
