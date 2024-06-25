@@ -7,11 +7,11 @@ import (
 )
 
 func main() {
-	var showLines bool
-	flag.BoolVar(&showLines, "n", false, "Omit new line")
+	var noNewLine bool
+	flag.BoolVar(&noNewLine, "n", false, "Omit new line")
 	flag.Parse()
 	args := s.Join(flag.Args(), " ")
-	if showLines {
+	if noNewLine {
 		fmt.Print(args)
 	} else {
 		fmt.Println(args)
