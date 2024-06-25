@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"log"
@@ -19,13 +18,13 @@ func main() {
 	var showLines bool
 	flag.BoolVar(&showLines, "n", false, "Show Lines Numbers")
 	flag.Parse()
-	file, err := os.Open(s.Join(flag.Args(), " "))
+	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
 	check(err)
-	scanner := bufio.NewScanner(file)
-	for i := 1; scanner.Scan(); i++ {
+	lines := s.Split(string(dat), "\n")
+	for i := 1; i<=len(lines); i++ {
 		if showLines || i == 1 {
 			fmt.Printf("%d ", i)
 		}
-		fmt.Println(scanner.Text())
+		fmt.Println(lines[i-1])
 	}
 }
