@@ -21,10 +21,10 @@ func main() {
 	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
 	check(err)
 	lines := s.Split(string(dat), "\n")
-	for i := 1; i<=len(lines); i++ {
-		if showLines || i == 1 {
-			fmt.Printf("%d ", i)
+	for i, line := range lines {
+		if showLines || i == 0 {
+			fmt.Printf("%d ", i+1)
 		}
-		fmt.Println(lines[i-1])
+		fmt.Println(line)
 	}
 }

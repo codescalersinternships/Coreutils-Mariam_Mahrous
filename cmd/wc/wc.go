@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	s "strings"
 )
 
 func check(e error) {
@@ -20,22 +21,16 @@ func main() {
 	flag.BoolVar(&showWords, "w", false, "Show Words")
 	flag.BoolVar(&showChars, "c", false, "Show Chars")
 	flag.Parse()
-	var req = arg[1]
-	if len(arg) > 1 {
-		req = arg[len(arg)-1]
-	}
-	dat, err := os.ReadFile(req)
+	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
 	check(err)
-	var line, word, char int = 0, 0, len(string(dat))
+	var line, word, char int = len(s.Split(string(dat), "\n")), 0, len(string(dat))
 	var lastchar = ' '
 	runes := []rune(string(dat))
-	for i := 0; i < len(string(runes)); i++ {
-		if runes[i] == '\n' {
-			line++
-		} else if runes[i] != ' ' && runes[i] != '\n' && (lastchar == ' ' || lastchar == '\n') {
+	for _, grapheme := range runes {
+		if grapheme != ' ' && grapheme != '\n' && (lastchar == ' ' || lastchar == '\n') {
 			word++
 		}
-		lastchar = runes[i]
+		lastchar = grapheme
 	}
 	if showLines {
 		fmt.Printf("%d ", line)
@@ -49,5 +44,5 @@ func main() {
 	if len(arg) == 2 {
 		fmt.Printf("%d %d %d ", line, word, char)
 	}
-	fmt.Printf("%s \n", req)
+	fmt.Printf("%s \n", s.Join(flag.Args(), " "))
 }

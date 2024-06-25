@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"log"
@@ -26,14 +25,9 @@ func main() {
 	flag.IntVar(&n, "n", 10, "No of lines displayed")
 	flag.Parse()
 	numberCheck(n)
-	file, err := os.Open(s.Join(flag.Args(), " "))
+	dat, err := os.ReadFile(s.Join(flag.Args(), " "))
 	check(err)
-	scanner := bufio.NewScanner(file)
-	var lines []string
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	file.Close()
+	lines:= s.Split(string(dat), "\n")
 	j := len(lines) - n
 	if len(lines)-n < 0 {
 		j = 0
