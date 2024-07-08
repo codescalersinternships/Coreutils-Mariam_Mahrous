@@ -22,7 +22,7 @@ func main() {
 	check(err)
 	lines := strings.Split(string(dat), "\n")
 	for i, line := range lines {
-		if showLines || i == 0 {
+		if showLines {
 			fmt.Printf("%d ", i+1)
 		}
 		fmt.Println(line)

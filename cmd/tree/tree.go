@@ -40,18 +40,10 @@ func printLength(depth int) {
 	fmt.Print("|__")
 }
 
-func numberCheck(n int) {
-	if n < 0 {
-		n = 0
-		fmt.Println("Try again using a valid postive number")
-		os.Exit(1)
-	}
-}
 
 func main() {
 	flag.IntVar(&a, "l", math.MaxInt, "Depth of Directories")
 	flag.Parse()
-	numberCheck(a)
 	err := filepath.WalkDir("./", visit)
 	check(err)
 }
