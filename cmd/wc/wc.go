@@ -21,19 +21,14 @@ func main() {
 	flag.BoolVar(&showWords, "w", false, "Show Words")
 	flag.BoolVar(&showChars, "c", false, "Show Chars")
 	flag.Parse()
-	dat, err := os.ReadFile(strings.Join(flag.Args(), " "))
+	dat, err := os.ReadFile(flag.Args()[0])
 	check(err)
-	var line, word, char int = len(strings.Split(string(dat), "\n")), 0, len(string(dat))
-	var lastchar = ' '
-	runes := []rune(string(dat))
-	for _, grapheme := range runes {
-		if grapheme != ' ' && grapheme != '\n' && (lastchar == ' ' || lastchar == '\n') {
-			word++
-		}
-		lastchar = grapheme
+	var lines, word, char int = len(strings.Split(string(dat), "\n")), 0, len(string(dat))
+	for _, line := range strings.Split(string(dat), "\n") {
+		word += len(strings.Split(string(line), " "))
 	}
 	if showLines {
-		fmt.Printf("%d ", line)
+		fmt.Printf("%d ", lines)
 	}
 	if showWords {
 		fmt.Printf("%d ", word)
@@ -42,7 +37,7 @@ func main() {
 		fmt.Printf("%d ", char)
 	}
 	if len(arg) == 2 {
-		fmt.Printf("%d %d %d ", line, word, char)
+		fmt.Printf("%d %d %d ", lines, word, char)
 	}
 	fmt.Printf("%s \n", strings.Join(flag.Args(), " "))
 }

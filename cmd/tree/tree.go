@@ -12,6 +12,7 @@ import (
 )
 
 var a int = math.MaxInt
+var Startingpath = "."
 
 func check(e error) {
 	if e != nil {
@@ -24,10 +25,10 @@ func visit(path string, d fs.DirEntry, err error) error {
 	if err != nil {
 		return err
 	}
-	if len(strings.Split(path, "/")) <= a && path != "./" {
+	if len(strings.Split(path, "/")) <= a+len(strings.Split(Startingpath, "/")) && path != Startingpath {
 		pathSplited := strings.Split(path, "/")
 		printLength(len(pathSplited))
-		fmt.Println(" ", pathSplited[len(pathSplited) -1])
+		fmt.Println(" ", pathSplited[len(pathSplited)-1])
 	}
 	return nil
 
@@ -38,12 +39,15 @@ func printLength(depth int) {
 		fmt.Print("  ")
 	}
 	fmt.Print("|__")
-}
 
+}
 
 func main() {
 	flag.IntVar(&a, "l", math.MaxInt, "Depth of Directories")
 	flag.Parse()
-	err := filepath.WalkDir("./", visit)
+	if len(flag.Args()) > 0 {
+		Startingpath = flag.Args()[0]
+	}
+	err := filepath.WalkDir(Startingpath, visit)
 	check(err)
 }
